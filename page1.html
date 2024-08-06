@@ -164,7 +164,7 @@
     <div class="language-selector">
         <select id="language-select" onchange="changeLanguage()">
             <option value="en">English</option>
-            <option value="ko">Korean</option>
+            <option value="ko">한국어</option>
         </select>
     </div>
 
@@ -173,37 +173,35 @@
         <h1 id="main-title">FAQ</h1>
         <div class="faq-section">
             <div class="faq-item">
-                <button class="faq-question">Question 1: What is CRLT?</button>
+                <button class="faq-question">What is CRLT?</button>
                 <div class="faq-answer">
                     <p>CRLT stands for Cookie Run Leak Team. We provide various tools and information for Cookie Run Kingdom.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">Question 2: How do I use the tools?</button>
+                <button class="faq-question">How do I extract data from Cookie Run Kingdom?</button>
                 <div class="faq-answer">
-                    <p>To use our tools, simply download them from the main page and follow the instructions provided with each tool.</p>
+                    <p>I can’t discuss data mining specifics, but extracting data involves a complex process.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">Question 3: Where can I get more information?</button>
+                <button class="faq-question">How can I become a CRLT member?</button>
                 <div class="faq-answer">
-                    <p>For more detailed information, visit our <a href="index.html" style="color: rgb(255, 255, 255);">main page</a> or contact our support team.</p>
+                    <p>It's simple. You need leak skills and technology that can impress us.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">Question 4: How do I use the tools?</button>
+                <button class="faq-question">How can I become famous through leaks?</button>
                 <div class="faq-answer">
-                    <p>To use our tools, simply download them from the main page and follow the instructions provided with each tool.</p>
+                    <p>If you want to become famous through leaks, that’s a misunderstanding. As the number of leakers increases, Devsisters can enhance security, which is why leak methods are not well-known.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">Question 5: How do I use the tools?</button>
+                <button class="faq-question">Where can I get more information?</button>
                 <div class="faq-answer">
-                    <p>To use our tools, simply download them from the main page and follow the instructions provided with each tool.</p>
+                    <p>For more detailed information, visit the main page or check out our Twitter (X) at @CRLT_5.</p>
                 </div>
             </div>
-
-            <!-- 여기에 추가적인 FAQ를 추가할 수 있습니다 -->
         </div>
 
         <!-- 메인 페이지로 돌아가는 버튼 -->
@@ -222,17 +220,23 @@
     </div>
 
     <script>
-        // 아코디언 FAQ 구현
+        // FAQ 항목 클릭 시 답변 표시
         document.querySelectorAll('.faq-question').forEach(item => {
             item.addEventListener('click', () => {
-                // 클릭한 질문이 이미 활성화된 경우
-                if (item.classList.contains('active')) {
-                    item.classList.remove('active');
-                } else {
-                    // 모든 질문 비활성화
-                    document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
-                    // 클릭한 질문 활성화
+                const isActive = item.classList.contains('active');
+                // 모든 질문 비활성화
+                document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+                // 모든 답변 비활성화
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    a.style.opacity = 0;
+                    a.style.maxHeight = '0';
+                });
+                // 클릭한 질문이 활성화되지 않았다면 활성화
+                if (!isActive) {
                     item.classList.add('active');
+                    const answer = item.nextElementSibling;
+                    answer.style.opacity = 1;
+                    answer.style.maxHeight = '500px'; // 최대 높이 설정
                 }
             });
         });
@@ -246,38 +250,74 @@
             if (selectedLanguage === 'en') {
                 mainTitle.textContent = 'FAQ';
                 document.querySelectorAll('.faq-question').forEach((item, index) => {
-                    item.textContent = `Question ${index + 1}: What is CRLT?`;
-                });
-                document.querySelectorAll('.faq-answer').forEach((item) => {
-                    item.innerHTML = `<p>CRLT stands for Cookie Run Leak Team. We provide various tools and information for Cookie Run Kingdom.</p>`;
-                });
-                document.querySelectorAll('.faq-item').forEach((item, index) => {
+                    if (index === 0) {
+                        item.textContent = 'What is CRLT?';
+                    }
                     if (index === 1) {
-                        item.querySelector('.faq-question').textContent = 'Question 2: How do I use the tools?';
-                        item.querySelector('.faq-answer').innerHTML = `<p>To use our tools, simply download them from the main page and follow the instructions provided with each tool.</p>`;
+                        item.textContent = 'How do I extract data from Cookie Run Kingdom?';
                     }
                     if (index === 2) {
-                        item.querySelector('.faq-question').textContent = 'Question 3: Where can I get more information?';
-                        item.querySelector('.faq-answer').innerHTML = `<p>For more detailed information, visit our <a href="index.html" style="color: white;">main page</a> or contact our support team.</p>`;
+                        item.textContent = 'How can I become a CRLT member?';
+                    }
+                    if (index === 3) {
+                        item.textContent = 'How can I become famous through leaks?';
+                    }
+                    if (index === 4) {
+                        item.textContent = 'Where can I get more information?';
+                    }
+                });
+                document.querySelectorAll('.faq-answer').forEach((item, index) => {
+                    if (index === 0) {
+                        item.innerHTML = `<p>CRLT stands for Cookie Run Leak Team. We provide various tools and information for Cookie Run Kingdom.</p>`;
+                    }
+                    if (index === 1) {
+                        item.innerHTML = `<p>I can’t discuss data mining specifics, but extracting data involves a complex process.</p>`;
+                    }
+                    if (index === 2) {
+                        item.innerHTML = `<p>It's simple. You need leak skills and technology that can impress us.</p>`;
+                    }
+                    if (index === 3) {
+                        item.innerHTML = `<p>If you want to become famous through leaks, that’s a misunderstanding. As the number of leakers increases</p>Devsisters can enhance security, which is why leak methods are not well-known.</p>`;
+                    }
+                    if (index === 4) {
+                        item.innerHTML = `<p>For more detailed information, visit the main page or check out our Twitter (X) at @CRLT_5.</p>`;
                     }
                 });
                 returnButton.textContent = 'Return to Main Page';
             } else if (selectedLanguage === 'ko') {
                 mainTitle.textContent = '자주 묻는 질문';
                 document.querySelectorAll('.faq-question').forEach((item, index) => {
-                    item.textContent = `질문 ${index + 1}: CRLT란 무엇인가요?`;
-                });
-                document.querySelectorAll('.faq-answer').forEach((item) => {
-                    item.innerHTML = `<p>CRLT는 Cookie Run Leak Team을 의미합니다. 우리는 Cookie Run Kingdom을 위한 다양한 도구와 정보를 제공합니다.</p>`;
-                });
-                document.querySelectorAll('.faq-item').forEach((item, index) => {
+                    if (index === 0) {
+                        item.textContent = 'CRLT가 무엇인가요?';
+                    }
                     if (index === 1) {
-                        item.querySelector('.faq-question').textContent = '질문 2: 도구를 어떻게 사용하나요?';
-                        item.querySelector('.faq-answer').innerHTML = `<p>도구를 사용하려면, 메인 페이지에서 다운로드한 후 각 도구에 제공된 지침을 따르세요.</p>`;
+                        item.textContent = '쿠키런 킹덤 데이터를 어떻게 추출하나요?';
                     }
                     if (index === 2) {
-                        item.querySelector('.faq-question').textContent = '질문 3: 더 많은 정보를 어디에서 얻을 수 있나요?';
-                        item.querySelector('.faq-answer').innerHTML = `<p>자세한 정보는 메인 페이지를 방문하거나 지원 팀에 문의하세요.</p>`;
+                        item.textContent = 'CRLT 멤버가 되고 싶어요! 어떻게 멤버가 될 수 있죠?';
+                    }
+                    if (index === 3) {
+                        item.textContent = '유출을 통해 유명해지고 싶어요! 어떻게 유출을 하나요?';
+                    }
+                    if (index === 4) {
+                        item.textContent = '더 많은 정보를 어디에서 얻을 수 있나요?';
+                    }
+                });
+                document.querySelectorAll('.faq-answer').forEach((item, index) => {
+                    if (index === 0) {
+                        item.innerHTML = `<p>CRLT는 Cookie Run Leak Team의 약자입니다. 저희는 쿠킹덤에 다양한 유출 정보를 제공합니다.</p>`;
+                    }
+                    if (index === 1) {
+                        item.innerHTML = `<p>데이터 마이닝에 관한 내용은 말씀드릴 수 없지만, 데이터를 추출하려면 복잡한 작업을 거쳐야 합니다.</p>`;
+                    }
+                    if (index === 2) {
+                        item.innerHTML = `<p>쉽습니다. 저희를 놀라게 할 정도의 유출 실력과 기술이 필요합니다.</p>`;
+                    }
+                    if (index === 3) {
+                        item.innerHTML = `<p>유출을 통해 유명해지고 싶다면, 잘못된 생각입니다. 실제로 유출자가 많아지면</p>데브시스터즈가 보안을 강화할 수 있기 때문에 유출 방법이 잘 알려지지 않는 것입니다.</p>`;
+                    }
+                    if (index === 4) {
+                        item.innerHTML = `<p>자세한 정보는 메인 페이지를 방문하거나 저희 트위터(X)를 확인해 보세요. (트위터 아이디는 @CRLT_5입니다.)</p>`;
                     }
                 });
                 returnButton.textContent = '메인 페이지로 돌아가기';
