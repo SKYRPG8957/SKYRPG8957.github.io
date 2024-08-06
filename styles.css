@@ -29,6 +29,17 @@ html, body {
     -webkit-filter: none; /* Remove webkit filter effects */
     transition: filter 0.5s ease;
 }
+/* 클릭 가능한 요소에 손가락 모양 포인터 추가 */
+a, button {
+    cursor: pointer;
+}
+
+/* 모달 창 내 버튼에 대한 스타일을 지정 */
+.modal-content .close-button,
+#access-code-submit-button,
+#access-code-cancel-button {
+    cursor: pointer;
+}
 
 /* Dark overlay for the video */
 .video-background::before {
