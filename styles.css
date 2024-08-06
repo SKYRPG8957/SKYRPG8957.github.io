@@ -1,0 +1,347 @@
+/* Ensure the body and html take full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Container for the background video */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Style for the background video */
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the video covers the entire area */
+    filter: none; /* Remove filter effects */
+    -webkit-filter: none; /* Remove webkit filter effects */
+    transition: filter 0.5s ease;
+}
+
+/* Dark overlay for the video */
+.video-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); /* Transparent overlay */
+    z-index: 1;
+    transition: background 0.5s ease;
+}
+
+/* Style for the content container */
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    z-index: 2;
+}
+
+/* Style for the language selector */
+.language-selector {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+}
+
+#language-select {
+    background-color: rgba(0, 0, 0, 0.7); /* Black with semi-transparent background */
+    color: #ffffff;
+    border: 1px solid #666;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover 상태 */
+#language-select:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Darker black background on hover */
+}
+
+/* 모든 텍스트 선택 차단 */
+body, .no-select {
+    user-select: none; /* 텍스트 선택 차단 */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+/* 관리 기능 버튼들 */
+.admin-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5); /* 검은색에 반투명 배경 */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s, border 0.2s, transform 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 16px; /* 버튼 폰트 크기 */
+}
+
+/* Hover 상태 */
+.admin-button:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Hover 시 검은색 배경을 더 진하게 */
+}
+
+/* Active 상태 */
+.admin-button:active {
+    transform: scale(0.95); /* 클릭 시 버튼이 작아지는 효과 */
+}
+
+/* Style for buttons container */
+.button-container {
+    margin-top: 20px;
+}
+
+/* Style for buttons */
+.download-button, .info-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s, border 0.2s, transform 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.download-button:hover, .info-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.download-button:active, .info-button:active {
+    transform: scale(0.95);
+}
+
+/* Modal Background */
+.modal-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); /* Transparent background */
+    z-index: 4;
+    overflow: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Modal Background Visible */
+.modal-background.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Modal Content */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Modal Content Visible */
+.modal-background.show .modal-content {
+    opacity: 1;
+}
+
+/* Close Button */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #ddd;
+}
+
+/* File Modal Content */
+.file-modal-content a {
+    color: white;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.file-modal-content a:hover {
+    text-decoration: underline;
+}
+
+/* Access Code Modal */
+.access-code-modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); /* Transparent background */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.access-code-modal-content {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    width: 300px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: relative;
+}
+
+.access-code-modal-content input {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 4px;
+    background: transparent;
+    color: white;
+}
+
+.access-code-modal-content button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: 1px solid white;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.access-code-modal-content button:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.access-code-modal-content .close-button {
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Alert Modal */
+.alert-modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); /* Transparent background */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.alert-modal-content {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    width: 300px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: relative;
+}
+
+.alert-modal-content p {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 4px;
+    background: transparent;
+    color: white;
+}
+
+.alert-modal-content button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: 1px solid white;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.alert-modal-content button:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.alert-modal-content .close-button {
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Timer Style */
+.alert-modal-content #alert-time-remaining {
+    margin-top: 15px;
+    font-size: 16px;
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+/* Text Shadow */
+.content h1, .content p {
+    color: white; /* Text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Shadow effect */
+}
+/* styles.css */
+.underlined {
+    text-decoration: underline;
+    color: rgb(255, 250, 250); /* 링크 색상 (필요에 따라 변경) */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+}

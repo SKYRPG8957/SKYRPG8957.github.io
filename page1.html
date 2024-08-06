@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 페이지 전체에 적용되는 스타일 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            min-height: 100%;
+            overflow: hidden; /* 페이지 스크롤 방지 */
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            margin-top: 0;
+            opacity: 0; /* 초기 상태에서 숨김 */
+            animation: fadeIn 1s forwards; /* 페이드 인 애니메이션 */
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            color: white;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.6); /* 검은색 배경에 약간의 투명도 */
+            padding: 8px 16px; /* 모바일에서 버튼 크기 조정 */
+            border-radius: 5px;
+            display: inline-block;
+            transition: transform 0.3s ease, background-color 0.3s ease; /* 버튼 확대 및 배경색 애니메이션 */
+            animation: bounce 0.5s; /* 버튼 애니메이션 */
+            font-size: 14px; /* 모바일에서 버튼 텍스트 크기 조정 */
+        }
+
+        .button-container a:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* 호버 시 배경색을 더 어둡게 */
+            transform: scale(1.05); /* 호버 시 버튼 확대 */
+        }
+
+        /* 비디오 배경 */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5);
+            animation: fadeIn 2s; /* 비디오 페이드 인 애니메이션 */
+            pointer-events: none; /* 비디오 클릭 및 터치 이벤트 비활성화 */
+        }
+
+        /* FAQ 스타일 */
+        .faq-section {
+            max-width: 1000px; /* 최대 폭을 1000px로 확대 */
+            width: 90%; /* 화면 폭의 90% */
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5); /* 밝은 검은색 배경에 반투명 */
+            border-radius: 10px;
+            margin-top: 50px;
+            opacity: 0; /* 초기 상태에서 숨김 */
+            animation: fadeIn 2s forwards; /* 페이드 인 애니메이션 */
+        }
+
+        .faq-question {
+            cursor: pointer;
+            padding: 15px; /* 패딩을 늘려서 더 넓은 클릭 영역 제공 */
+            background-color: rgba(0, 0, 0, 0.4); /* 밝은 검은색 배경에 반투명 */
+            color: white;
+            border: none;
+            text-align: left;
+            outline: none;
+            transition: background-color 0.3s ease; /* 배경색 애니메이션 */
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px; /* 글자 크기를 조금 키워서 가독성 향상 */
+        }
+
+        .faq-question:hover {
+            background-color: rgba(0, 0, 0, 0.6); /* 호버 시 배경색을 더 밝게 */
+        }
+
+        .faq-answer {
+            padding: 15px; /* 패딩을 늘려서 내용의 여백을 넓힘 */
+            background-color: rgba(0, 0, 0, 0.3); /* 밝은 검은색 배경에 반투명 */
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px; /* 글자 크기를 조금 키워서 가독성 향상 */
+            opacity: 0; /* 초기 상태에서 숨김 */
+            max-height: 0; /* 초기 상태에서 높이 0 */
+            overflow: hidden; /* 내용이 넘칠 때 숨김 */
+            transition: opacity 0.5s ease, max-height 0.5s ease; /* 애니메이션 효과 */
+        }
+
+        .faq-question.active + .faq-answer {
+            opacity: 1;
+            max-height: 500px; /* 최대 높이 설정 */
+        }
+
+        /* 애니메이션 정의 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* 언어 선택 드롭다운 */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 3;
+        }
+
+        .language-selector select {
+            background: rgba(0, 0, 0, 0.6); /* 검은색 배경에 약간의 투명도 */
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background 0.3s ease; /* 배경색 애니메이션 */
+        }
+
+        .language-selector select:hover {
+            background: rgba(0, 0, 0, 0.8); /* 호버 시 배경색을 더 어둡게 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 언어 선택 드롭다운 -->
+    <div class="language-selector">
+        <select id="language-select" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="ko">Korean</option>
+        </select>
+    </div>
+
+    <!-- FAQ 섹션 -->
+    <div class="content">
+        <h1 id="main-title">FAQ</h1>
+        <div class="faq-section">
+            <div class="faq-item">
+                <button class="faq-question">Question 1: What is CRLT?</button>
+                <div class="faq-answer">
+                    <p>CRLT stands for Cookie Run Leak Team. We provide various tools and information for Cookie Run Kingdom.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Question 2: How do I use the tools?</button>
+                <div class="faq-answer">
+                    <p>To use our tools, simply download them from the main page and follow the instructions provided with each tool.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Question 3: Where can I get more information?</button>
+                <div class="faq-answer">
+                    <p>For more detailed information, visit our <a href="index.html" style="color: rgb(255, 255, 255);">main page</a> or contact our support team.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Question 4: How do I use the tools?</button>
+                <div class="faq-answer">
+                    <p>To use our tools, simply download them from the main page and follow the instructions provided with each tool.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Question 5: How do I use the tools?</button>
+                <div class="faq-answer">
+                    <p>To use our tools, simply download them from the main page and follow the instructions provided with each tool.</p>
+                </div>
+            </div>
+
+            <!-- 여기에 추가적인 FAQ를 추가할 수 있습니다 -->
+        </div>
+
+        <!-- 메인 페이지로 돌아가는 버튼 -->
+        <div class="button-container">
+            <a id="return-button" href="index.html">Return to Main Page</a>
+        </div>
+    </div>
+
+    <!-- 비디오 배경 -->
+    <div class="video-background">
+        <video id="background-video" autoplay muted loop>
+            <source src="background.mp4" type="video/mp4">
+            <source src="background.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        // 아코디언 FAQ 구현
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                // 클릭한 질문이 이미 활성화된 경우
+                if (item.classList.contains('active')) {
+                    item.classList.remove('active');
+                } else {
+                    // 모든 질문 비활성화
+                    document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+                    // 클릭한 질문 활성화
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // 언어 변경 기능
+        function changeLanguage() {
+            const selectedLanguage = document.getElementById('language-select').value;
+            const mainTitle = document.getElementById('main-title');
+            const returnButton = document.getElementById('return-button');
+
+            if (selectedLanguage === 'en') {
+                mainTitle.textContent = 'FAQ';
+                document.querySelectorAll('.faq-question').forEach((item, index) => {
+                    item.textContent = `Question ${index + 1}: What is CRLT?`;
+                });
+                document.querySelectorAll('.faq-answer').forEach((item) => {
+                    item.innerHTML = `<p>CRLT stands for Cookie Run Leak Team. We provide various tools and information for Cookie Run Kingdom.</p>`;
+                });
+                document.querySelectorAll('.faq-item').forEach((item, index) => {
+                    if (index === 1) {
+                        item.querySelector('.faq-question').textContent = 'Question 2: How do I use the tools?';
+                        item.querySelector('.faq-answer').innerHTML = `<p>To use our tools, simply download them from the main page and follow the instructions provided with each tool.</p>`;
+                    }
+                    if (index === 2) {
+                        item.querySelector('.faq-question').textContent = 'Question 3: Where can I get more information?';
+                        item.querySelector('.faq-answer').innerHTML = `<p>For more detailed information, visit our <a href="index.html" style="color: white;">main page</a> or contact our support team.</p>`;
+                    }
+                });
+                returnButton.textContent = 'Return to Main Page';
+            } else if (selectedLanguage === 'ko') {
+                mainTitle.textContent = '자주 묻는 질문';
+                document.querySelectorAll('.faq-question').forEach((item, index) => {
+                    item.textContent = `질문 ${index + 1}: CRLT란 무엇인가요?`;
+                });
+                document.querySelectorAll('.faq-answer').forEach((item) => {
+                    item.innerHTML = `<p>CRLT는 Cookie Run Leak Team을 의미합니다. 우리는 Cookie Run Kingdom을 위한 다양한 도구와 정보를 제공합니다.</p>`;
+                });
+                document.querySelectorAll('.faq-item').forEach((item, index) => {
+                    if (index === 1) {
+                        item.querySelector('.faq-question').textContent = '질문 2: 도구를 어떻게 사용하나요?';
+                        item.querySelector('.faq-answer').innerHTML = `<p>도구를 사용하려면, 메인 페이지에서 다운로드한 후 각 도구에 제공된 지침을 따르세요.</p>`;
+                    }
+                    if (index === 2) {
+                        item.querySelector('.faq-question').textContent = '질문 3: 더 많은 정보를 어디에서 얻을 수 있나요?';
+                        item.querySelector('.faq-answer').innerHTML = `<p>자세한 정보는 메인 페이지를 방문하거나 지원 팀에 문의하세요.</p>`;
+                    }
+                });
+                returnButton.textContent = '메인 페이지로 돌아가기';
+            }
+        }
+
+        // 페이지 로드 시 언어 초기화
+        function initializeLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const defaultLanguage = userLang.startsWith('ko') ? 'ko' : 'en';
+            document.getElementById('language-select').value = defaultLanguage;
+            changeLanguage();
+        }
+
+        window.onload = initializeLanguage;
+    </script>
+</body>
+</html>
