@@ -1,0 +1,7 @@
+/* style.css */
+body {
+    background-image: url('backimage.png'); /* 이미지 파일 경로 수정 */
+    background-size: cover; /* 이미지 크기를 화면에 맞춰 채우기 */
+    background-repeat: no-repeat; /* 이미지 반복 없애기 */
+    background-position: center; /* 이미지 중앙 정렬 */
+  }
